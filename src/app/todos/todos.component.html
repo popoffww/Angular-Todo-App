@@ -1,0 +1,51 @@
+
+<ul *ngIf="todosService.todos.length; else noTodos">
+
+  <div class="input-group mb-3">
+    <input type="text" class="form-control"
+           placeholder="Найти задачу..."
+           [(ngModel)]="searchString"
+    >
+  </div>
+
+  <li *ngFor="let todo of todosService.todos | todosFilter: searchString; let i = index">
+    <div class="input-group mb-3">
+
+<!--      Checkbox-->
+      <div class="input-group-prepend">
+        <div class="input-group-text">
+          <input type="checkbox" [checked]="todo.completed" (change)="onChange(todo.id)">
+        </div>
+      </div>
+
+<!--      ID-->
+      <div class="input-group-prepend">
+        <span class="input-group-text"><strong>{{ i + 1 }}</strong></span>
+      </div>
+
+<!--      Title-->
+      <div [class.done]="todo.completed" class="form-control">
+        {{ todo.title }}
+      </div>
+
+
+<!--      Date-->
+      <div class="input-group-prepend">
+        <span class="input-group-text">{{ todo.date | date: 'd MMM y'}}</span>
+      </div>
+
+<!--      Icon-->
+      <div class="input-group-text">
+        <i class="fa fa-trash" (click)="removeTodo(todo.id)"></i>
+      </div>
+
+    </div>
+
+  </li>
+
+</ul>
+
+
+<ng-template #noTodos>
+  <p>Задач нет</p>
+</ng-template>

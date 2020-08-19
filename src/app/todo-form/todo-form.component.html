@@ -1,0 +1,14 @@
+
+<div class="input-group mb-3 add-todo">
+  <input
+    type="text"
+    class="form-control"
+    placeholder="Добавьте имя задачи..."
+    [(ngModel)]="title"
+    (keydown.enter)="addTodo()"
+  >
+  <button (click)="addTodo()" type="button" class="btn btn-info">
+    Добавить
+  </button>
+</div>
+
